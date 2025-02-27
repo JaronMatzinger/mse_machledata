@@ -1,0 +1,4 @@
+{
+    "name": "tinyvit",
+    "implementation": "serve-model.TinyViTModel"
+}
