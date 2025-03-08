@@ -5,6 +5,8 @@ st.write('''
 # This is the document title
 
 This is some _markdown_.
+This is some more **markdown**.
+This is even more __markdown__.
 ''')
 
 import pandas as pd
@@ -23,3 +25,9 @@ fig, ax = plt.subplots()
 ax.hist(arr, bins=20)
 
 st.write(fig)  # 👈 Draw a Matplotlib chart
+
+from transformers import AutoModelForSequenceClassification
+from torchinfo import summary
+
+model = AutoModelForSequenceClassification.from_pretrained("nlptown/bert-base-multilingual-uncased-sentiment")
+st.write(summary(model, input_size=(2, 512), dtypes=['torch.IntTensor']))
