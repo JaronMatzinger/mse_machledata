@@ -17,10 +17,16 @@ jobs:
         uses: actions/setup-python@v4
         with:
           # Semantic version range syntax or exact version of a Python version
-          python-version: '3.x'
+          python-version: '3.11.11'
           # Optional - x64 or x86 architecture, defaults to x64
           architecture: 'x64'
         # --- after this step, python is available ---
       # Now you can do whatever you want with python:
       - name: Display Python version
         run: python -c "import sys; print(sys.version)"
+      # Install python dependencies using pip
+      - name: Install Python dependencies
+        uses: py-actions/py-dependency-install@v4
+        with:
+          update-pip: "true"
+          path: "${{ github.workspace }}/github_actions_intro/requirements.txt"

@@ -136,8 +136,9 @@ You can find this workflow in `lab04/github_actions_intro/workflows/python_demo.
 We can run it with `act` by issuing the following command in the `lab04` directory:
 
 ```shell
-./bin/act push -W github_actions_intro/workflows
+act push -W github_actions_intro/workflows --container-architecture linux/amd64
 ```
+The addition: '--container-architecture linux/amd64' is only for Apple M-processors.
 
 `act push` simulates a push to your github repository.
 
