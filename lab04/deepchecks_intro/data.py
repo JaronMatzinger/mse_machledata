@@ -17,9 +17,12 @@ class AntsBeesDataset(torchvision.datasets.ImageFolder):
         path, target = self.samples[index]
         sample = self.loader(path)
         sample = self.get_cv2_image(sample)
+
+        #if self.transforms is not None:
+        #    transformed = self.transforms(image=sample, target=target)
+        #    sample, target = transformed["image"], transformed["target"]
         if self.transforms is not None:
-            transformed = self.transforms(image=sample, target=target)
-            sample, target = transformed["image"], transformed["target"]
+            sample = self.transforms(image=sample)["image"]
         else:
             if self.transform is not None:
                 sample = self.transform(image=sample)["image"]

@@ -10,7 +10,7 @@ import torchvision
 
 import os
 
-from lab04.deepchecks_advanced.check_attack_solution import FGSMAttackCheck
+from check_attack_solution import FGSMAttackCheck
 from data import AntsBeesDataset
 
 
@@ -94,7 +94,11 @@ if __name__ == "__main__":
 
     # TODO: Add your new check to the suite. Don't forget to pass the model, device, and epsilon as parameters.
     # Hint: You can use the `add` method from the suite to add your new check (FGSMAttackCheck).
-    suite.add(...)
+    suite.add(
+        FGSMAttackCheck(
+            device=device, name='FGSM Attach Check', model=model, epsilon=1e-4
+        )
+    )
 
     result = suite.run(
         train_dataset=train_data, test_dataset=test_data, max_samples=5000

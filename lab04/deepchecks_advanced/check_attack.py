@@ -17,6 +17,8 @@ class FGSMAttackCheck(SingleDatasetCheck):
     ):
         super().__init__(**kwargs)
         self.device = device
+        self.epsilon = epsilon
+        self.model = model
 
     # You can ignore the following method, we don't need it for this check, except to initialize the cache.
     def initialize_run(self, context: Context, dataset_kind: DatasetKind):
@@ -45,7 +47,9 @@ class FGSMAttackCheck(SingleDatasetCheck):
             loss.backward(inputs=[x])
 
             # TODO: Perform the FGSM attack and check if the model is fooled.
-            y_tilde = ...
+            x_tilde = self.fgsm_attack(x, self.epsilon)
+            longits_tilde = model(x_tilde)
+            y_tilde = torch.argmax(torch.softmax(longits_tilde, dim=1))
 
             if y_tilde != y.int():
                 self.cache["failing_samples"] = self.cache.get("failing_samples", 0) + 1
@@ -53,7 +57,9 @@ class FGSMAttackCheck(SingleDatasetCheck):
 
     def compute(self, context: Context, dataset_kind: DatasetKind) -> CheckResult:
         # TODO: Get the results from the cache and compute the ratio of failing samples.
-        result = {"ratio": ...}
+        result = {
+            "ratio": self.cache['failing_samples'] / self.cache['total_samples']
+        }
 
         # TODO: Create a plotly express figure to display the ratio of failing samples.
         # (yes, you have my permission create a pie chart: https://plotly.com/python/pie-charts/)
@@ -68,5 +74,6 @@ class FGSMAttackCheck(SingleDatasetCheck):
     @staticmethod
     def fgsm_attack(x, epsilon):
         # TODO: Implement the FGSM attack.
-        x_tilde = ...
+        x_tilde = x + epsilon * x.grad.data.sign()
+        x_tilde = torch.clamp(x, 0, 1)
         return x_tilde
