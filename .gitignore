@@ -5,3 +5,6 @@ __pycache__
 **/mlartifacts/
 **/mlruns/
 **/mlflow.db
+hymenoptera_data
+model.pth
+report.html
