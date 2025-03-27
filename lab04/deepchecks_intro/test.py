@@ -93,4 +93,4 @@ if __name__ == "__main__":
     result = suite.run(
         train_dataset=train_data, test_dataset=test_data, max_samples=5000
     )
-    result.save_as_html("report.html")
+    result.save_as_html("report.html", as_widget=False)
