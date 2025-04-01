@@ -1,0 +1,37 @@
+tasks:
+
+- source: tasks/load.ipynb
+  product:
+    cqi_df: output/load-cqi_df.pkl
+    FEATURE_COLUMNS: output/load-FEATURE_COLUMNS.pkl
+    MODEL_NAME: output/load-MODEL_NAME.pkl
+    rev_df: output/load-rev_df.pkl
+    MISSING_COLUMNS: output/load-MISSING_COLUMNS.pkl
+    nb: output/load.ipynb
+
+- source: tasks/features.ipynb
+  product:
+    rev_df: output/features-rev_df.pkl
+    nb: output/features.ipynb
+
+- source: tasks/training.ipynb
+  product:
+    xgb_model: output/training-xgb_model.pkl
+    nb: output/training.ipynb
+
+- source: tasks/validation.ipynb
+  product:
+    rev_df: output/validation-rev_df.pkl
+    MISSING_COLUMNS: output/validation-MISSING_COLUMNS.pkl
+    nb: output/validation.ipynb
+
+- source: tasks/embedding.ipynb
+  product:
+    embeddings_reduced: output/embedding-embeddings_reduced.pkl
+    rev_df: output/embedding-rev_df.pkl
+    nb: output/embedding.ipynb
+
+- source: tasks/testing.ipynb
+  product:
+    xgb_model: output/testing-xgb_model.pkl
+    nb: output/testing.ipynb
