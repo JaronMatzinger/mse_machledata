@@ -8,3 +8,7 @@ __pycache__
 hymenoptera_data
 model.pth
 report.html
+**.db
+**.cfg
+standalone_admin_password.txt
+logs
