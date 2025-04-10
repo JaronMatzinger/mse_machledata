@@ -12,3 +12,4 @@ report.html
 **.cfg
 standalone_admin_password.txt
 logs
+**/data/
